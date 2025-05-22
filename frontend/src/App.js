@@ -15,7 +15,7 @@ const App = () => {
 
   const fetchTodos = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/todos');
+      const res = await axios.get('https://todo-summary-assistant-78wg.onrender.com/api/todos');
       setTodos(res.data);
     } catch (err) {
       console.error('Error fetching todos:', err);
@@ -26,10 +26,10 @@ const App = () => {
     if (!newTodo.trim()) return;
     try {
       if (editingId) {
-        await axios.put(`http://localhost:5000/api/todos/${editingId}`, { text: newTodo });
+        await axios.put(`https://todo-summary-assistant-78wg.onrender.com/api/todos/${editingId}`, { text: newTodo });
         setEditingId(null);
       } else {
-        await axios.post('http://localhost:5000/api/todos', { text: newTodo });
+        await axios.post('https://todo-summary-assistant-78wg.onrender.com/api/todos', { text: newTodo });
       }
       setNewTodo('');
       fetchTodos();
@@ -44,7 +44,7 @@ const App = () => {
 
   const confirmDelete = async () => {
     try {
-      await axios.delete(`http://localhost:5000/api/todos/${deleteModal.id}`);
+      await axios.delete(`https://todo-summary-assistant-78wg.onrender.com/api/todos/${deleteModal.id}`);
       setDeleteModal({ open: false, id: null });
       fetchTodos();
     } catch (err) {
@@ -65,7 +65,7 @@ const App = () => {
     setLoading(true);
     setMessage('');
     try {
-      const res = await axios.post('http://localhost:5000/api/summarize');
+      const res = await axios.post('https://todo-summary-assistant-78wg.onrender.com/api/summarize');
       setMessage(res.data.message || ' Summary sent successfully to Slack!');
     } catch (err) {
       setMessage('Failed to send summary to Slack. Please try again.');
